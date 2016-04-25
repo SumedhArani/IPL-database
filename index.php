@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,6 +27,18 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        div.box 
+        {
+         width: 50%;
+         float: left;
+        }
+        div.box1
+        {
+         width: 50%;
+         float: right
+        }
+    </style>
 
 </head>
 
@@ -51,14 +62,17 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
+					 <li>
+                        <a class="page-scroll" href="#page-top">Home</a>
+                    </li>	
                     <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#download">Teams</a>
+                        <a class="page-scroll" href="#team">Teams</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Sponsor</a>
+                        <a class="page-scroll" href="#sponsors">Sponsors</a>
                     </li>
                 </ul>
             </div>
@@ -97,47 +111,55 @@
     </section>
 
     <!-- Download Section -->
-    <section id="download" class="content-section text-center">
+    <section id="team" class="content-section text-center">
         <div class="download-section">
             <div class="container">
-                <div class="col-lg-8 col-lg-offset-2">
+                   <div class="col-lg-8 col-lg-offset-2">
                     <h2>Teams</h2>
-                    <a href="http://startbootstrap.com/template-overviews/grayscale/" class="btn btn-default btn-lg">Royal Challengers Bangalore</a>
+                    <?php
+
+    include "connect_to_db.php";
+    $query= 'select distinct name from team';
+    $result = mysqli_query($con , $query);  
+    while($team = mysqli_fetch_array($result , MYSQLI_ASSOC))
+    {
+        $team_name=$team['name'];
+        echo"<div class='box'><a href='team_info.php?t_name=$team_name' class='btn btn-default btn-lg' style='margin: 5px; width: 98%;'>".$team_name."</a> </div>";
+       
+    }
+
+    
+   ?>
+
+                    
+                 <!--   <div class="box1"><a href="srh.html" class="btn btn-default btn-lg" style="margin: 5px; width: 98%">Sunrisers Hyderabad</a></div>
+                    <div class="box"><a href="dd.html" class="btn btn-default btn-lg" style="margin: 5px; width : 98%">Delhi Daredevils</a></div>
+                    <div class="box1"><a href="kxip.html" class="btn btn-default btn-lg" style="margin: 5px; width:98%">Kings XI Punjab</a></div>
+                    <div class="box"><a href="kkr.html" class="btn btn-default btn-lg" style="margin: 5px; width : 98%">Kolkata Knight Riders</a></div>
+                    <div class="box"><a href="csk.html" class="btn btn-default btn-lg" style="margin: 5px; width : 98%">Chennai Super Kings</a></div>
+                    <div class="box1"><a href="mi.html" class="btn btn-default btn-lg" style="margin: 5px; width: 98%">Mumbai Indians</a></div>
+                    <div class="box1"><a href="rr.html" class="btn btn-default btn-lg" style="margin: 5px; width: 98%">Rajasthan Royals</a></div>
+                    <div style="clear:both;"></div>
                 </div>
+                -->         
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contact Start Bootstrap</h2>
-                <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
-                </p>
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                    </li>
-                    <li>
-                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <section id="sponsors" class="container content-section text-center">
+        <h2 >Sponsors</h2>  
+        <div class = "sprs">
+            <img src="img/intex.jpg" alt="Sponsor" style="width:200px;height:120px;position:relative;left:-15%;top:20%;"/>
+            <img src="img/oxigen.jpeg" alt="Sponsor" style="width:200px;height:120px;position:relative;left:-5%;top:20%;"/>
+            <img src="img/tvs.jpg" alt="Sponsor" style="width:240px;height:120px;position:relative;left:5%;top:20%;"/>
+            <img src="img/astral.gif" alt="Sponsor" style="width:240px;height:120px;position:relative;left:15%;top:20%;"/>
+        </div>  
     </section>
-
-    <!-- Map Section -->
-    <div id="map"></div>
-
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p>Copyright &copy; Team Ghazz</p>
         </div>
     </footer>
 
@@ -159,3 +181,6 @@
 </body>
 
 </html>
+
+
+
